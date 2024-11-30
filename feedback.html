@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="about.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="index.html" class="logo">SpeedReeder</a>
+        </div>
+        <div class="navbar-right">
+            <a href="about.html">About</a>
+            <a href="feedback.html">Contact/Feedback</a>
+            <a href="faqs.html">FAQ</a>
+        </div>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+    <iframe 
+        src="https://docs.google.com/forms/d/e/1FAIpQLScL1PW_MFnsjUcZnKj-U4Wy1Gdx4Haygb2Xd_fgEQrkDySyYQ/viewform?embedded=true"
+        width="90%" 
+        height="800" 
+        style="max-width: 1200px;"
+        frameborder="0">
+        Loading…
+    </iframe>
+    <h1>Thanks! Feedback helps make SpeedReeder better for all!</h1>
+    <style>
+        iframe {
+            padding-top:50px;
+        }
+    </style>
+  <script>
+    function toggleMenu() {
+    const navbarRight = document.querySelector('.navbar-right');
+    navbarRight.classList.toggle('show'); // Toggle the "show" class
+}
+    </script>
+</body>
+</html>
