@@ -93,33 +93,42 @@ function getIntervalFromSpeed(wpm) {
 
 function updatePreview() {
     const previewContainer = document.getElementById("previewContainer");
-    const previewText = words
+    previewContainer.innerHTML = words
         .map((word, i) =>
-            i === index ? `<span class="highlighted-word">${word}</span>` : word
+            i === index
+                ? `<span class="highlighted-word" data-index="${i}">${word}</span>`
+                : `<span class="preview-word" data-index="${i}">${word}</span>`
         )
         .join(" ");
-    previewContainer.innerHTML = previewText;
 
     // Locate the highlighted word
     const highlightedWord = previewContainer.querySelector(".highlighted-word");
     if (highlightedWord) {
-        // Get the preview container dimensions
         const containerRect = previewContainer.getBoundingClientRect();
-
-        // Get the highlighted word position
         const wordRect = highlightedWord.getBoundingClientRect();
-
-        // Calculate the middle of the preview container
         const containerMiddle = containerRect.top + containerRect.height / 2;
 
-        // Check if the word is below the middle
         if (wordRect.top > containerMiddle) {
-            // Smoothly scroll to position the word just below the middle
             const scrollAmount = wordRect.top - containerMiddle + highlightedWord.offsetHeight;
             previewContainer.scrollBy({ top: scrollAmount, behavior: "smooth" });
         }
     }
+
+    // Add click event listener to each word
+    const previewWords = previewContainer.querySelectorAll(".preview-word, .highlighted-word");
+    previewWords.forEach((word) => {
+        word.addEventListener("click", (event) => {
+            const wordIndex = parseInt(event.target.dataset.index, 10);
+            if (!isNaN(wordIndex)) {
+                index = wordIndex; // Update the index to the clicked word
+                isPaused = false; // Resume reading from the new word
+                clearInterval(wordInterval);
+                wordInterval = setInterval(displayWords, getIntervalFromSpeed(currentSpeed));
+            }
+        });
+    });
 }
+
 
 // File Reading Functionality
 function readTextFromPDF(pdfFile) {
