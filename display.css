@@ -225,12 +225,18 @@ body.dark-mode #timeRemaining {
     overflow-y: hidden;
     max-height: 100px;
     transition: opacity 0.5s ease-out, color 0.5s ease; /* smooth transition */
-    pointer-events: none;
+    /* pointer-events: none; */ /* Removed this line */
 }
 
 body.dark-mode .preview-container {
     color: #ddd;
 }
+/* Prevent text selection */
+.preview-word, .highlighted-word {
+    user-select: none; /* Prevent text selection */
+    cursor: pointer;   /* Change cursor to a pointer when hovering */
+}
+
 
 /* theme toggle button (positioned above the footer) */
 .theme-toggle {
