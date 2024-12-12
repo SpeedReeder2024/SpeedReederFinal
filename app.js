@@ -85,6 +85,7 @@ function togglePause() {
     if (isPaused) {
         clearInterval(wordInterval); // Clear current interval when paused
     } else {
+        clearInterval(wordInterval); // Ensure no old interval is running
         wordInterval = setInterval(displayWords, getIntervalFromSpeed(currentSpeed)); // Restart with new interval
     }
 }
@@ -93,7 +94,7 @@ function togglePause() {
 function backTenWords() {
     relativeIndex = Math.max(0, relativeIndex - 10);
     isPaused = false;
-    clearInterval(wordInterval);
+    clearInterval(wordInterval); // Clear previous interval
     wordInterval = setInterval(displayWords, getIntervalFromSpeed(currentSpeed));
 }
 
@@ -139,7 +140,8 @@ function updatePreview() {
                         previewContainer.scrollTop += scrollAdjustment;
                     }
 
-                    // Resume reading after the adjustment
+                    // Clear the old interval and set a new one with current speed
+                    clearInterval(wordInterval);
                     wordInterval = setInterval(displayWords, getIntervalFromSpeed(currentSpeed)); // Resume reading
                     isPaused = false; // Automatically resume after delay
                 }, 200); // 200 ms delay before resuming
@@ -197,7 +199,8 @@ function updatePreviewFromSelectedWord(clickedIndex) {
                         previewContainer.scrollTop += scrollAdjustment;
                     }
 
-                    // Resume reading after adjustment
+                    // Clear the old interval and set a new one with current speed
+                    clearInterval(wordInterval);
                     wordInterval = setInterval(displayWords, getIntervalFromSpeed(currentSpeed));
                     isPaused = false;
                 }, 200); // 200 ms delay before resuming
@@ -252,12 +255,12 @@ function initializeDisplayPage() {
         updatePreview(); // Populate the preview container
         updateTimeRemainingUI(); // Initialize time remaining UI
 
-        clearInterval(wordInterval);
+        if (wordInterval) clearInterval(wordInterval);
         wordInterval = setInterval(displayWords, getIntervalFromSpeed(currentSpeed));
     } else {
         console.error("No text found in localStorage.");
         document.getElementById("displayArea").textContent =
-        "No text available. Please return to the main page and enter text.";
+            "No text available. Please return to the main page and enter text.";
     }
 }
 
