@@ -95,9 +95,10 @@ function backTenWords() {
     relativeIndex = Math.max(0, relativeIndex - 10);
     isPaused = false;
     clearInterval(wordInterval); // Clear previous interval
-    wordInterval = setInterval(displayWords, getIntervalFromSpeed(currentSpeed));
+    wordInterval = setInterval(displayWords, getIntervalFromSpeed(currentSpeed)); // Restart with new interval
 }
 
+// Update preview with current and upcoming words
 function updatePreview() {
     const previewContainer = document.getElementById("previewContainer");
 
@@ -264,7 +265,7 @@ function initializeDisplayPage() {
     }
 }
 
-// Event Listeners (index.html)
+// Event Listener for file input (index.html)
 if (document.getElementById("fileInput")) {
     document.getElementById("fileInput").addEventListener("change", function (event) {
         const file = event.target.files[0];
@@ -273,9 +274,23 @@ if (document.getElementById("fileInput")) {
             const fileType = file.type;
 
             if (fileType === "image/png") {
-                Tesseract.recognize(file, "eng", { logger: (m) => console.log(m) })
+                // Set initial placeholder text as "Reading text..."
+                const textInput = document.getElementById("textInput");
+                textInput.placeholder = "Reading text... 0%";
+
+                Tesseract.recognize(file, "eng", {
+                    logger: (m) => {
+                        // Calculate and update the reading progress
+                        if (m.status === "recognizing text") {
+                            const progress = Math.round(m.progress * 100); // Get percentage
+                            textInput.placeholder = `Reading text... ${progress}%`;
+                        }
+                    }
+                })
                     .then(({ data: { text } }) => {
-                        document.getElementById("textInput").value = text;
+                        // After OCR is complete, insert the recognized text into the input box
+                        textInput.value = text;
+                        textInput.placeholder = "Enter or paste text here..."; // Reset placeholder
                     })
                     .catch((error) => {
                         console.error("Error during OCR processing:", error);
@@ -287,9 +302,9 @@ if (document.getElementById("fileInput")) {
             }
         }
     });
-
     document.getElementById("displayButton").addEventListener("click", startDisplay);
 }
+
 
 // Event Listeners (display.html)
 if (document.getElementById("displayArea")) {
