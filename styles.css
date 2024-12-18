@@ -371,3 +371,7 @@ body.dark-mode .hamburger div {
         font-size: 1.7em; /* Adjust for better scaling on smaller screens */
     }
 }
+.legal-link {
+    text-decoration: underline;
+    color:white;
+}
