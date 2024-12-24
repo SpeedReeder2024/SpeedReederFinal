@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subscription Page</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="about.css">
 </head>
 <body>
-    <h1>Manage Your Subscription</h1>
+    <h1 class="premh1">Supercharge your SpeedReeding potential w/ SpeedReeder Premium!</h1>
     <div class="navbar">
         <div class="navbar-left">
             <a href="index.html" class="logo">SpeedReeder</a>
@@ -26,11 +26,23 @@
         publishable-key="pk_live_51QZ2PnENas9vE4pKJwtZZR1fAvZTtmLDLPzTWqQSbLQOLLM2bIxmJnpJYqcWOm3kSsyUaDdFdN0HHGE3IV6sgONy00BEptNAUs"
         success-url="https://speedreeder.com/subscription.html?payment_status=success"
         cancel-url="https://speedreeder.com/subscription.html?payment_status=cancelled">
-    </stripe-buy-button>
-
-    <!-- Go Back to Homepage -->
-    <a href="index.html"><button id="homepage">Go to Homepage</button></a>
-
+    </stripe-buy-button>  
+    <!-- Feature Cards Section -->
+    <div class="features-container">
+        <div class="feature-card">
+            <h3>Light/Dark Mode</h3>
+            <p>Provides the option to switch between light and dark modes for optimal reading experiences.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Photo-to-Text Recognition</h3>
+            <p>Scan text using a camera on your device, so you can SpeedReed whatever you please.</p>
+        </div>
+        <div class="feature-card">
+            <h3>600+ WPM Speed Reading</h3>
+            <p>Facilitates reading up to 1000wpm, much more than the 600 the free version provides!</p>
+        </div>
+    </div>
+    <h3 class="h3lowopacity">Still not pleased? We're working hard to expand both the free and premium versions' capability, so stay tuned!</h3>
     <!-- Link to Subscription.js -->
     <script src="subscription.js"></script>
 </body>
