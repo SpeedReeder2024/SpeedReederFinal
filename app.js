@@ -322,3 +322,4 @@ if (document.getElementById("displayArea")) {
         }
     });
 }
+
