@@ -12,7 +12,6 @@ function updatePremiumUI(enable) {
     }
     // Alert only when toggling premium features, not on page reload
     if (!sessionStorage.getItem('premiumHandled')) {
-        alert(`Premium features have been ${enable ? 'enabled' : 'disabled'}.`);
         sessionStorage.setItem('premiumHandled', true);
     }
 }
