@@ -335,3 +335,6 @@ body.dark-mode .theme-toggle {
     text-decoration: underline;
     color:white;
 }
+.premiumdisabled {
+    opacity:50%;
+}
