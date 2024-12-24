@@ -375,3 +375,6 @@ body.dark-mode .hamburger div {
     text-decoration: underline;
     color:white;
 }
+.premiumdisabled {
+    opacity:50%;
+}
