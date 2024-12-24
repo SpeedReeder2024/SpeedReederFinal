@@ -338,3 +338,101 @@ body.dark-mode .theme-toggle {
 .premiumdisabled {
     opacity:50%;
 }
+/* Container for feature cards */
+.features-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+
+/* Individual feature card styling */
+.feature-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px); /* Slight lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card h3 {
+    font-size: 1.5rem;
+    color: #388E3C;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Dark mode adjustments */
+body.dark-mode .feature-card {
+    background-color: #333;
+    color: #ddd;
+}
+
+body.dark-mode .feature-card h3 {
+    color: #ff6347;
+}
+
+body.dark-mode .feature-card p {
+    color: #ccc;
+}
+.premh1 {
+    padding-top:100px;
+    font-size:2.5rem;
+}
+/* Centering the Stripe buy button */
+stripe-buy-button {
+    display: block;
+    margin: 50px auto; /* Center horizontally with auto margins */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Drop shadow for the button */
+    padding: 15px;
+    border-radius: 5px; /* Optional: Rounded corners for the button */
+    transition: box-shadow 0.3s ease; /* Smooth transition for shadow effect */
+}
+
+/* Hover effect for the button shadow */
+stripe-buy-button:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Slightly larger shadow on hover */
+}
+
+/* Centering the button vertically on the page */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Default value, stack content vertically */
+    align-items: center;
+    min-height: 100vh; /* Full viewport height */
+    overflow: auto;
+}
+
+#homepage {
+    display: block;
+    margin-top: 30px;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    background-color: #388E3C;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#homepage:hover {
+    background-color: #2e7d32; /* Darker shade on hover */
+}
+.h3lowopacity {
+    opacity:50%;
+}
