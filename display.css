@@ -360,3 +360,6 @@ body.dark-mode footer {
     text-decoration: underline;
     color:white;
 }
+.premiumdisabled {
+    opacity:50%;
+}
