@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Manage Your Subscription</h1>
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="index.html" class="logo">SpeedReeder</a>
+        </div>
+        <div class="navbar-right">
+            <a href="subscription.html">Subscription Page</a>
+            <a href="feedback.html">Contact/Feedback</a>
+            <a href="faqs.html">FAQ's/About</a>
+        </div>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+    <!-- Stripe Buy Button Integration -->
+    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
+    <stripe-buy-button
+        buy-button-id="buy_btn_1QZLayENas9vE4pKXW3pRq8J"
+        publishable-key="pk_test_51QZ2PnENas9vE4pKoZXipAzTe8QH0kVD2NOjAe0aagvJ9wEYMI3xJ1EdD3NBa1C2gIuoIwzmM7gfX7vOXd8PGckf00qw0yO2Sh"
+        success-url="https://speedreeder.com/subscription.html?payment_status=success"
+        cancel-url="https://speedreeder.com/subscription.html?payment_status=cancelled">
+    </stripe-buy-button>
+
+    <!-- Go Back to Homepage -->
+    <a href="index.html"><button id="homepage">Go to Homepage</button></a>
+
+    <!-- Link to Subscription.js -->
+    <script src="subscription.js"></script>
+</body>
+</html>
