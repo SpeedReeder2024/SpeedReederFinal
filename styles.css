@@ -210,7 +210,7 @@ body.dark-mode .highlighted-word {
 /* Dark Mode Toggle */
 .theme-toggle {
     position: fixed;
-    bottom: 60px; /* Adjusted vertical position */
+    bottom: 80px; /* Adjusted vertical position */
     left: 20px;
     padding: 10px;
     font-size: 1.5em;
