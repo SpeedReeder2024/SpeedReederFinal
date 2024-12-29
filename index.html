@@ -40,8 +40,15 @@
     <div id="inputContainer">
         <h1>Speedreeder | Study More, Invest Less</h1>
         <textarea id="textInput" placeholder="Enter or paste text here, or upload a png or pdf file below."></textarea>
-        <input type="file" id="fileInput" accept="application/pdf,image/png" style="display: none;" />
-        <label for="fileInput">Upload a File</label>
+        <a href="javascript:void(0);" id="fileLink">Upload a File</a>
+        <input type="file" id="fileInput" accept=".png, .pdf" style="display: none;" />
+
+        <script>
+          document.getElementById("fileLink").addEventListener("click", function () {
+            document.getElementById("fileInput").click();
+          });
+        </script>
+
         <button id="displayButton">Display Words</button>
     </div>
 </div>
