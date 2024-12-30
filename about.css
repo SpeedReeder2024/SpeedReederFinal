@@ -436,7 +436,7 @@ body {
 .h3lowopacity {
     opacity:50%;
 }
-button {
+.button {
     font-size: 0.9rem; /* Smaller font size */
     padding: 5px 10px; /* Adjusted padding */
     margin: 5px;
