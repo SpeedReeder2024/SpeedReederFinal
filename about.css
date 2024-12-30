@@ -436,3 +436,14 @@ body {
 .h3lowopacity {
     opacity:50%;
 }
+button {
+    font-size: 0.9rem; /* Smaller font size */
+    padding: 5px 10px; /* Adjusted padding */
+    margin: 5px;
+    background-color: #388E3C; /* Default button color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
