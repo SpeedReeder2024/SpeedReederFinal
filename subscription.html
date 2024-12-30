@@ -19,6 +19,7 @@
         </div>
         <button class="hamburger" onclick="toggleMenu()">☰</button>
     </div>
+    
     <!-- Stripe Buy Button Integration -->
     <script async src="https://js.stripe.com/v3/buy-button.js"></script>
     <stripe-buy-button
@@ -26,7 +27,11 @@
         publishable-key="pk_live_51QZ2PnENas9vE4pKJwtZZR1fAvZTtmLDLPzTWqQSbLQOLLM2bIxmJnpJYqcWOm3kSsyUaDdFdN0HHGE3IV6sgONy00BEptNAUs"
         success-url="https://speedreeder.com/subscription.html?payment_status=success"
         cancel-url="https://speedreeder.com/subscription.html?payment_status=cancelled">
-    </stripe-buy-button>  
+    </stripe-buy-button>
+
+    <div class="premium cancel-container">
+        <button id="cancelSubscription" class="premium button">Manage or Cancel Subscription</button>
+    </div>
     <!-- Feature Cards Section -->
     <div class="features-container">
         <div class="feature-card">
@@ -42,8 +47,21 @@
             <p>Facilitates reading up to 1000wpm, much more than the 600 the free version provides!</p>
         </div>
     </div>
+
     <h3 class="h3lowopacity">Still not pleased? We're working hard to expand both the free and premium versions' capability, so stay tuned!</h3>
+
     <!-- Link to Subscription.js -->
     <script src="subscription.js"></script>
+
+    <script>
+        document.getElementById('cancelSubscription').addEventListener('click', () => {
+            const premiumEnabled = localStorage.getItem('premiumEnabled') === 'true';
+            if (!premiumEnabled) {
+                alert('This feature is only available for premium users.');
+                return;
+            }
+            window.location.href = 'https://billing.stripe.com/p/login/8wMbKBgAia8hdj28ww';
+        });
+    </script>
 </body>
 </html>
