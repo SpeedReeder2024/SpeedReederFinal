@@ -2,6 +2,7 @@
 const acceptedEmails = [
     "johnfitness@me.com",
     "matthewfitness01@gmail.com",
+    "mtthwfitness@gmail.com",
     ];
   
   // Validate the email input
