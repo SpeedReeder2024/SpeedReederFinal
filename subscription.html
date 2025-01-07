@@ -64,24 +64,53 @@
             window.location.href = 'https://billing.stripe.com/p/login/8wMbKBgAia8hdj28ww';
         });
     </script>
-    <script>
-        // Remove query parameters from the URL after page load
-        const params = new URLSearchParams(window.location.search);
-        const paymentStatus = params.get("payment_status");
-      
-        if (paymentStatus === "success") {
-      
-          // Use the History API to update the URL without reloading the page
-          const cleanUrl = window.location.origin + window.location.pathname;
-          window.history.replaceState(null, "", cleanUrl);
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const paymentStatus = urlParams.get('payment_status');
+
+        if (paymentStatus === 'success') {
+            // Payment was successful, enable premium features
+            updatePremiumUI(true); // Ensure premium features are granted
+            alert("Payment successful! Premium features are now enabled.");
+
+            // Clear the URL after granting premium access
+            const cleanUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState(null, "", cleanUrl);
+        } else if (paymentStatus === 'cancelled') {
+            // Payment was cancelled, notify the user
+            alert("Payment was cancelled. Please try again.");
         } else {
-          // Handle invalid or missing payment_status
-          document.getElementById("statusMessage").textContent = "Invalid access. Please contact support.";
-          setTimeout(() => {
-            window.location.href = "/error.html"; // Redirect to an error page
-          }, 3000);
+            // Handle invalid or missing payment_status
+            document.getElementById("statusMessage").textContent =
+                "Invalid access. Please contact support.";
+            setTimeout(() => {
+                window.location.href = "/error.html"; // Redirect to an error page
+            }, 3000);
         }
-      </script>
+
+        // Maintain existing premium status on page load
+        const premiumEnabled = localStorage.getItem('premiumEnabled') === 'true';
+        updatePremiumUI(premiumEnabled);
+    });
+
+    // Function to enable/disable premium features in local storage and UI
+    function updatePremiumUI(enable) {
+        localStorage.setItem('premiumEnabled', enable);
+        const premiumButtons = document.querySelectorAll('.premium');
+
+        if (premiumButtons) {
+            premiumButtons.forEach(button => {
+                button.disabled = !enable;
+                button.classList.toggle('premiumdisabled', !enable);
+            });
+        }
+
+        if (!sessionStorage.getItem('premiumHandled')) {
+            sessionStorage.setItem('premiumHandled', true);
+        }
+    }
+</script>
 </body>
 </html>
 
