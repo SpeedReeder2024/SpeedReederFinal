@@ -446,4 +446,97 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+    padding:7px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+.login {
+    margin-top:15px;
+    
+}
+.email-form {
+    margin-top:30px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .email-form h1 {
+    margin-bottom: 20px;
+  }
+
+  .email-form input {
+    width: calc(100% - 20px); /* Adjust width to accommodate padding */
+    padding: 10px; /* Consistent padding */
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding is included in the width */
+}
+  
+  #statusMessage {
+    margin-top: 10px;
+    color: #333;
+  }
+
+.button.extrapadding {
+    padding:10px;
+    width:80%;
+    font-size: 1em;
+}
+.infosection {
+    margin-top:100px;
+    text-align: center;
+    text-decoration: none;
+    padding-top: 50px;
+    background-color: #f9f9f9; /* Light background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 20px;
+}
+
+.infosection h1 {
+    font-size: 2rem;
+    color: #388E3C; /* Same green as the button */
+    text-decoration: underline;
+    margin-bottom: 10px;
+}
+
+.infosection h4 {
+    font-size: 1.2rem;
+    color: #555; /* Darker grey for contrast */
+    margin-bottom: 20px;
+    font-weight: 400;
+    opacity: 0.8; /* Subtle transparency for emphasis */
+}
+
+.infosection ul {
+    list-style: none; /* Remove default bullets */
+    padding: 0; /* Remove padding for consistent alignment */
+}
+
+.infosection li {
+    font-size: 1.1rem;
+    color: #333; /* Dark text for readability */
+    margin-top: 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd; /* Underline effect */
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.infosection li:hover {
+    color: white; /* Change text color on hover */
+    background-color: #388E3C; /* Highlight with green background */
+    border-radius: 4px; /* Smooth edges on hover */
+    cursor: pointer;
+    span {
+        color:white;
+        transition:0.3s ease;
+    }
+}
+
+.infosection li span {
+    font-weight: bold; /* Highlight keywords */
+    color: #388E3C; /* Match the green color scheme */
 }
