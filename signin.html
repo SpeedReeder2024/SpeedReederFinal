@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send Test Email</title>
+  <link rel="stylesheet" href="about.css">
+</head>
+<body>
+
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="index.html" class="logo">SpeedReeder</a>
+        </div>
+        <div class="navbar-right">
+            <a href="subscription.html">SpeedReeder Premium</a>
+            <a href="feedback.html">Contact/Feedback</a>
+            <a href="faqs.html">FAQ's/About</a>
+        </div>
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+    </div>
+    <div class="infosection">
+        <h1>Log into SpeedReeder Premium</h1>
+        <h4>In order to log into SpeedReeder Premium, please follow the instructions below.</h4>
+        <ul>
+            <li>First, enter your <span>email address</span> into the box below. It should be the same email address you bought premium with.</li>
+            <li>Second, find the email with the <span>link</span> to the SpeedReeder premium page.</li>
+            <li>Third, again enter your email address upon entry to <span>SpeedReeder Premium</span> to verify identity – and then you're in!</li>
+        </ul>
+    </div>
+  <div class="email-form">
+    <h1>Send Premium Link</h1>
+    <input type="email" id="email" placeholder="Enter your email address" required>
+    <button id="sendEmailBtn" class="button extrapadding">Send Email</button>
+    <p id="statusMessage"></p>
+  </div>
+  <script src="singuplogic.js"></script>
+  <h4>Having Troubles? Contact us via the <a href="feedback.html">Feedback form</a> to resolve any sign-in related errors.</h4>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init({
+            publicKey: "-HLsmBoRt7JAgdZ3E",
+        });
+    })();
+    </script>
+    <script>
+    // Extract the email from the URL
+    const params = new URLSearchParams(window.location.search);
+    const emailFromUrl = params.get('email');
+    const emailInput = document.getElementById("email");
+    const sendEmailBtn = document.getElementById("sendEmailBtn");
+    const statusMessage = document.getElementById("statusMessage");
+
+    // Simulate acceptedEmails list (replace this with a dynamic fetch if using a backend)
+    const acceptedEmails = JSON.parse(localStorage.getItem('acceptedEmails')) || [];
+
+    // Pre-fill the email input if email is in the URL and validate it
+    if (emailFromUrl && acceptedEmails.includes(emailFromUrl)) {
+      emailInput.value = emailFromUrl;
+      sendEmailBtn.disabled = false; // Enable the button if valid
+      statusMessage.textContent = "Welcome! Please confirm your email to log in.";
+    } else if (emailFromUrl) {
+      statusMessage.textContent = "Your email is not recognized. Access denied.";
+      setTimeout(() => {
+        window.location.href = "/error.html"; // Redirect to an error page
+      }, 3000);
+    } else {
+      statusMessage.textContent = "No email found in the URL. Please check your link.";
+    }
+
+    // Enable the button when the email matches an accepted email
+    emailInput.addEventListener("input", () => {
+      if (acceptedEmails.includes(emailInput.value)) {
+        sendEmailBtn.disabled = false;
+        statusMessage.textContent = "Email recognized. Click 'Log In' to proceed.";
+      } else {
+        sendEmailBtn.disabled = true;
+        statusMessage.textContent = "Email not recognized. Please try again.";
+      }
+    });
+    </script>
+</body>
+</html>
