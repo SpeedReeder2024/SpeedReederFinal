@@ -30,8 +30,9 @@
     </stripe-buy-button>
 
     <div class="premium cancel-container">
-        <button id="cancelSubscription" class="premium button">Manage or Cancel Subscription</button>
+        <button id="cancelSubscription" class="button">Manage or Cancel Subscription</button>
     </div>
+    <a href="signin.html"><button class="login button">Log into SpeedReeder Premium Account</button></a>
     <!-- Feature Cards Section -->
     <div class="features-container">
         <div class="feature-card">
@@ -63,5 +64,24 @@
             window.location.href = 'https://billing.stripe.com/p/login/8wMbKBgAia8hdj28ww';
         });
     </script>
+    <script>
+        // Remove query parameters from the URL after page load
+        const params = new URLSearchParams(window.location.search);
+        const paymentStatus = params.get("payment_status");
+      
+        if (paymentStatus === "success") {
+      
+          // Use the History API to update the URL without reloading the page
+          const cleanUrl = window.location.origin + window.location.pathname;
+          window.history.replaceState(null, "", cleanUrl);
+        } else {
+          // Handle invalid or missing payment_status
+          document.getElementById("statusMessage").textContent = "Invalid access. Please contact support.";
+          setTimeout(() => {
+            window.location.href = "/error.html"; // Redirect to an error page
+          }, 3000);
+        }
+      </script>
 </body>
 </html>
+
