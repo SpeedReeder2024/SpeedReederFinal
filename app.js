@@ -312,10 +312,25 @@ if (document.getElementById("displayArea")) {
     document.getElementById("pauseResumeButton").addEventListener("click", togglePause);
     document.getElementById("backTenWordsButton").addEventListener("click", backTenWords);
 
+    // Check if the user has premium access
+    const isPremiumUser = localStorage.getItem("premiumEnabled") === "true";
+
     document.getElementById("speedSlider").addEventListener("input", function (event) {
-        currentSpeed = event.target.value;
+        let selectedSpeed = parseInt(event.target.value, 10); // Get the selected speed from slider
+        const maxSpeed = isPremiumUser ? 1000 : 600; // Set max speed based on user status
+
+        // Restrict speed for non-premium users
+        if (!isPremiumUser && selectedSpeed > maxSpeed) {
+            alert("This feature is only available for premium users.");
+            selectedSpeed = maxSpeed; // Reset to max allowed speed for non-premium users
+            event.target.value = maxSpeed; // Update slider position
+        }
+
+        // Update the displayed speed
+        currentSpeed = selectedSpeed;
         document.getElementById("currentSpeed").textContent = `${currentSpeed} WPM`;
 
+        // Update the word interval if not paused
         if (!isPaused) {
             clearInterval(wordInterval);
             wordInterval = setInterval(displayWords, getIntervalFromSpeed(currentSpeed));
