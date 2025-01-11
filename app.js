@@ -321,7 +321,7 @@ if (document.getElementById("displayArea")) {
 
         // Restrict speed for non-premium users
         if (!isPremiumUser && selectedSpeed > maxSpeed) {
-            alert("This feature is only available for premium users.");
+            alert("Nuh uh. Only premium users may go above 600wpm. Buy premium on 'SpeedReeder Premium' page in top right");
             selectedSpeed = maxSpeed; // Reset to max allowed speed for non-premium users
             event.target.value = maxSpeed; // Update slider position
         }
@@ -337,4 +337,81 @@ if (document.getElementById("displayArea")) {
         }
     });
 }
+
+
+const scanTextButton = document.getElementById('scanTextButton');
+
+cameraButton.addEventListener('click', async () => {
+    try {
+        // Request camera access
+        mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
+
+        // Attach the stream to the video element
+        cameraStream.srcObject = mediaStream;
+
+        // Display the video container
+        videoContainer.style.display = 'block';
+        scanTextButton.style.display = 'inline-block';
+        cameraButton.style.display = 'none';
+
+        // Dynamically adjust aspect ratio
+        const settings = mediaStream.getVideoTracks()[0].getSettings();
+        const aspectRatio = settings.aspectRatio || 16 / 9;
+        videoContainer.style.aspectRatio = `${aspectRatio}`;
+    } catch (error) {
+        console.error('Error accessing the camera:', error);
+        alert('Could not access the camera. Please check permissions and try again.');
+    }
+});
+
+scanTextButton.addEventListener('click', async () => {
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    try {
+        // Show the loading overlay
+        loadingOverlay.style.display = 'flex';
+
+        // Create a canvas to capture the current frame
+        const canvas = document.createElement('canvas');
+        canvas.width = cameraStream.videoWidth;
+        canvas.height = cameraStream.videoHeight;
+        const ctx = canvas.getContext('2d');
+
+        // Draw the current frame from the video feed
+        ctx.drawImage(cameraStream, 0, 0, canvas.width, canvas.height);
+
+        // Convert canvas to image data
+        const imageDataURL = canvas.toDataURL('image/png');
+
+        // Use Tesseract.js to perform OCR on the captured frame
+        const { data: { text } } = await Tesseract.recognize(imageDataURL, 'eng', {
+            logger: (m) => {
+                if (m.status === 'recognizing text') {
+                    console.log(`Progress: ${Math.round(m.progress * 100)}%`);
+                }
+            }
+        });
+
+        // Save the extracted text to localStorage
+        localStorage.setItem('inputText', text.trim());
+
+        // Redirect to the display page
+        window.location.href = 'display.html';
+    } catch (error) {
+        console.error('Error during OCR processing:', error);
+        alert('Failed to scan text. Please try again.');
+    } finally {
+        // Hide the loading overlay
+        loadingOverlay.style.display = 'none';
+
+        // Stop the camera feed and hide the video container
+        if (mediaStream) {
+            const tracks = mediaStream.getTracks();
+            tracks.forEach(track => track.stop());
+            cameraStream.srcObject = null;
+        }
+        videoContainer.style.display = 'none';
+        scanTextButton.style.display = 'none';
+        cameraButton.style.display = 'inline-block';
+    }
+});
 
