@@ -207,11 +207,10 @@ body.dark-mode .highlighted-word {
     color: #ff6347;
 }
 
-/* Dark Mode Toggle */
 .theme-toggle {
     position: fixed;
-    bottom: 80px; /* Adjusted vertical position */
-    left: 20px;
+    bottom: 20px; /* Adjusted to give it some padding from the bottom */
+    left: 20px; /* Keeps the button aligned to the left */
     padding: 10px;
     font-size: 1.5em;
     background-color: transparent;
@@ -220,6 +219,25 @@ body.dark-mode .highlighted-word {
     color: #333;
     transition: color 0.3s ease; /* Smooth transition */
 }
+
+.theme-toggle::after {
+    content: "Premium";
+    position: absolute;
+    top: -6px; /* Small offset above the button */
+    right: -28px; /* Small offset to the right */
+    background-color: gold;
+    color: black;
+    opacity:70%;
+    font-size: 0.3em;
+    padding: 2px 5px;
+    border-radius: 3px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    z-index: 1; /* Keeps it above other elements */
+    pointer-events: none; /* Prevents it from interfering with clicks */
+}
+
+
 
 body.dark-mode .theme-toggle {
     color: #fff;
@@ -377,4 +395,95 @@ body.dark-mode .hamburger div {
 }
 .premiumdisabled {
     opacity:50%;
+}
+#videoContainer {
+    display: none;
+    position: relative;
+    width: 90%; /* Adjust the size as needed */
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #000;
+    aspect-ratio: 16 / 9; /* Default ratio */
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+#cameraStream {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+#loadingOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Darken effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    z-index: 10; /* Ensure it overlays the camera feed */
+    flex-direction: column;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+#cameraButton {
+    display: inline-block;
+    padding: 8px 16px; /* Reduced padding */
+    font-size: 0.9em; /* Slightly smaller font size */
+    cursor: pointer;
+    background-color: #73b176; /* Button background color */
+    border: none;
+    color: white; /* Text color */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    text-align: center;
+    margin-top: 10px;
+    text-decoration: none; /* Remove underline if any */
+    position: relative;
+}
+#cameraButton::after {
+    content: "Premium";
+    position: absolute;
+    background-color: gold;
+    color: black;
+    opacity: 70%;
+    font-size: 0.6em;
+    padding: 2px 5px;
+    border-radius: 3px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    z-index: 1; /* Keeps it above other elements */
+    pointer-events: none; /* Prevents it from interfering with clicks */
+    top: -8px;  /* Moves it up */
+    right: -28px; /* Moves it to the right */
+}
+
+#cameraButton:hover {
+    background-color: #388E3C; /* Darker background on hover */
+    transition: background-color 0.3s ease;
+}
+
+body.dark-mode #cameraButton {
+    background-color: #474747; /* Darker button background in dark mode */
+    color: #fff; /* White text in dark mode */
 }
