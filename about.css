@@ -235,11 +235,10 @@ body.dark-mode footer {
     }
 }
 
-/* Theme Toggle */
 .theme-toggle {
     position: fixed;
-    bottom: 20px;
-    left: 20px;
+    bottom: 20px; /* Adjusted to give it some padding from the bottom */
+    left: 20px; /* Keeps the button aligned to the left */
     padding: 10px;
     font-size: 1.5em;
     background-color: transparent;
@@ -247,6 +246,23 @@ body.dark-mode footer {
     cursor: pointer;
     color: #333;
     transition: color 0.3s ease; /* Smooth transition */
+}
+
+.theme-toggle::after {
+    content: "Premium";
+    position: absolute;
+    top: -6px; /* Small offset above the button */
+    right: -28px; /* Small offset to the right */
+    background-color: gold;
+    color: black;
+    opacity:70%;
+    font-size: 0.3em;
+    padding: 2px 5px;
+    border-radius: 3px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    z-index: 1; /* Keeps it above other elements */
+    pointer-events: none; /* Prevents it from interfering with clicks */
 }
 
 body.dark-mode .theme-toggle {
