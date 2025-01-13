@@ -34,3 +34,4 @@ document.addEventListener('DOMContentLoaded', () => {
     const premiumEnabled = localStorage.getItem('premiumEnabled') === 'true';
     updatePremiumUI(premiumEnabled);
 });
+
