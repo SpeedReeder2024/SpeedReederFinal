@@ -86,7 +86,7 @@ body.dark-mode .navbar-right a:hover {
     align-items: center;
     justify-content: center; /* Center content vertically */
     width: 100%;
-    margin-top: 40px; /* Reduced top margin to push the content up */
+    margin-top: 65px; /* Reduced top margin to push the content up */
     min-height: 80vh; /* Ensures space for centered content */
 }
 
